@@ -29,3 +29,4 @@ This project is an expense management system that consists of a streamlit fronte
     ''' commandline
     stramlit run frontend/app.py
     '''
+    
