@@ -69,6 +69,19 @@ def fetch_expense_summary(start_date, end_date):
         data=cursor.fetchall()
         return data
 
+def fetch_monthly_expense_summary():
+    logger.info(f"fetch_expense_summary_by_months")
+    with get_db_cursor() as cursor:
+        cursor.execute(
+            '''SELECT month(expense_date) as expense_month, 
+               monthname(expense_date) as month_name,
+               sum(amount) as total FROM expenses
+               GROUP BY expense_month, month_name;
+            '''
+        )
+        data = cursor.fetchall()
+        return data
+    
+
 if __name__=='__main__':
-    expenses=fetch_expenses_for_date('2024-09-30')
-    print(expenses)
+    print(fetch_monthly_expense_summary())
